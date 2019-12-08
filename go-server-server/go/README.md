@@ -18,8 +18,10 @@ To see how to make this your own, look here:
 
 ### Running the server
 To run the server, follow these simple steps:
-go install github.com/
+#install
+go install github.com/Happy726ZZZ/Server/go-server-server
 ```
-go run main.go
+#run
+go-server-server
 ```
 
