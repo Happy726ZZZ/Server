@@ -121,6 +121,27 @@ var routes = Routes{
 		"/v2/auth/signup",
 		Options,
 	},
+	
+	Route{
+		"OPTIONS",
+		strings.ToUpper("options"),
+		"/v2/article/{id}",
+		Options,
+	},
+
+	Route{
+		"OPTIONS",
+		strings.ToUpper("options"),
+		"/v2/articles",
+		Options,
+	},
+
+	Route{
+		"OPTIONS",
+		strings.ToUpper("options"),
+		"/v2/article/{id}/comments",
+		Options,
+	},
 }
 
 func Options(w http.ResponseWriter, r *http.Request) {
