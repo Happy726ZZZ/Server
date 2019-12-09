@@ -1,10 +1,13 @@
 package swagger
 
 import (
+	"io/ioutil"
+	"os"
 	"encoding/json"
 	"log"
 	"github.com/boltdb/bolt"
 	"strconv"
+	
 )
 
 func createdb() {
@@ -22,77 +25,41 @@ func createdb() {
 		_, err := tx.CreateBucket([]byte("articles"))
 		if err != nil {
 			//insert data
-			it := &Article {
-				Id: 1,
-				Name: "【LeetCode】128. Longest Consecutive Sequence",
-				Date: "2018-12-16 13:07:57",
-				Content: "resource/【LeetCode】128. Longest Consecutive Sequence.md",
+			file_name := [8]string{
+				"【LeetCode】128. Longest Consecutive Sequence",
+				"【LeetCode】32. Longest Valid Parentheses",
+				"【LeetCode】679. 24 Game",
+				"【LeetCode】23. Merge k Sorted Lists",
+				"【LeetCode】785. Is Graph Bipartite?",
+				"【LeetCode】105&106、根据前/后序遍历和中序遍历还原二叉树",
+				"【LeetCode】210. Course Schedule II",
+				"【LeetCode】685. Redundant Connection II",
 			}
-			jsons, _ := json.Marshal(it)
-			ArticlesTable.Put([]byte(strconv.Itoa(int(it.Id))), jsons)
-		
-			it = &Article {
-				Id: 2,
-				Name: "【LeetCode】32. Longest Valid Parentheses",
-				Date: "2018-12-16 13:09:01",
-				Content: "resource/【LeetCode】32. Longest Valid Parentheses.md",
+			file_date := [8]string{
+				"2018-12-16 13:07:57",
+				"2018-12-16 13:09:01",
+				"2018-12-16 13:13:11",
+				"2018-12-16 13:14:03",
+				"2018-12-16 13:06:07",
+				"2018-12-16 13:15:09",
+				"2018-12-16 13:16:10",
+				"2018-12-16 13:17:26",
 			}
-			jsons, _ = json.Marshal(it)
-			ArticlesTable.Put([]byte(strconv.Itoa(int(it.Id))), jsons)
-				
-			it = &Article {
-				Id: 3,
-				Name: "【LeetCode】679. 24 Game",
-				Date: "2018-12-16 13:13:11",
-				Content: "resource/【LeetCode】679. 24 Game.md",
-			}
-			jsons, _ = json.Marshal(it)
-			ArticlesTable.Put([]byte(strconv.Itoa(int(it.Id))), jsons)
 
-			it = &Article {
-				Id: 4,
-				Name: "【LeetCode】23. Merge k Sorted Lists",
-				Date: "2018-12-16 13:14:03",
-				Content: "resource/【LeetCode】23. Merge k Sorted Lists.md",
+			for n := 0; n < 8; n++ {
+				file_path := "./resource/" + file_name[n] +".md"
+				file, _ := os.Open(file_path)
+				defer file.Close()
+				content, _ := ioutil.ReadAll(file)
+				it := &Article {
+					Id: int32(n+1),
+					Name: file_name[n],
+					Date: file_date[n],
+					Content: string(content),
+				}
+				jsons, _ := json.Marshal(it)
+				ArticlesTable.Put([]byte(strconv.Itoa(int(it.Id))), jsons)
 			}
-			jsons, _ = json.Marshal(it)
-			ArticlesTable.Put([]byte(strconv.Itoa(int(it.Id))), jsons)
-
-			it = &Article {
-				Id: 5,
-				Name: "【LeetCode】785. Is Graph Bipartite?",
-				Date: "2018-12-16 13:06:07",
-				Content: "resource/【LeetCode】785. Is Graph Bipartite?.md",
-			}
-			jsons, _ = json.Marshal(it)
-			ArticlesTable.Put([]byte(strconv.Itoa(int(it.Id))), jsons)
-
-			it = &Article {
-				Id: 6,
-				Name: "【LeetCode】105&106、根据前/后序遍历和中序遍历还原二叉树",
-				Date: "2018-12-16 13:15:09",
-				Content: "resource/【LeetCode】105&106、根据前/后序遍历和中序遍历还原二叉树.md",
-			}
-			jsons, _ = json.Marshal(it)
-			ArticlesTable.Put([]byte(strconv.Itoa(int(it.Id))), jsons)
-			
-			it = &Article {
-				Id: 7,
-				Name: "【LeetCode】210. Course Schedule II",
-				Date: "2018-12-16 13:17:26",
-				Content: "resource/【LeetCode】685. Redundant Connection II.md",
-			}
-			jsons, _ = json.Marshal(it)
-			ArticlesTable.Put([]byte(strconv.Itoa(int(it.Id))), jsons)
-
-			it = &Article {
-				Id: 8,
-				Name: "【LeetCode】685. Redundant Connection II",
-				Date: "2018-12-16 13:17:26",
-				Content: "resource/【LeetCode】215. Kth Largest Element in an Array.md",
-			}
-			jsons, _ = json.Marshal(it)
-			ArticlesTable.Put([]byte(strconv.Itoa(int(it.Id))), jsons)
 		}
 
 		//if the table exists
