@@ -20,10 +20,10 @@ To see how to make this your own, look here:
 To run the server, follow these simple steps:
 ```
 #install
-go install github.com/Happy726ZZZ/Server/go-server-server
+go install github.com/Happy726ZZZ/Server/go-server-v1
 ```
 ```
 #run
-go-server-server
+go-server-v1
 ```
 
