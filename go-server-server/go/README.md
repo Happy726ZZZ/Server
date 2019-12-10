@@ -20,11 +20,11 @@ To see how to make this your own, look here:
 To run the server, follow these simple steps:
 ```
 #install
-go install github.com/Happy726ZZZ/Server/go-server-v1
+go install github.com/Happy726ZZZ/Server/go-server-server
 ```
 ```
 #run
 在go工作目录下运行
-go-server-v1
+go-server-server
 ```
 
