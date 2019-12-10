@@ -47,7 +47,7 @@ func createdb() {
 			}
 
 			for n := 0; n < 8; n++ {
-				file_path := "./resource/" + file_name[n] +".md"
+				file_path := "Server/go-server-server/resource//resource/" + file_name[n] +".md"
 				file, _ := os.Open(file_path)
 				defer file.Close()
 				content, _ := ioutil.ReadAll(file)
