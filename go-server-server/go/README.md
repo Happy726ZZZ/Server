@@ -24,6 +24,7 @@ go install github.com/Happy726ZZZ/Server/go-server-v1
 ```
 ```
 #run
+在go工作目录下运行
 go-server-v1
 ```
 
